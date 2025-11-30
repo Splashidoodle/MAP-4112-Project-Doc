@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0pt}
+\title{MAP 4112 Project}
+\author{Marco Osorio, Sparsh Pandey}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+With the vast amounts of data available for models to train on, a challenge emerges: computational resources are often wasted processing high-dimensional data. Even on a relatively small-sized dataset, such as the Labeled Faces in the Wild (LFW) dataset with 5,749 identities spanning 13,233 images, the running time can be visibly slow. Moreover, the extra dimensions provide little to no benefit in performance, sometimes even hindering it. Due to this, the data needs to be preprocessed by performing a dimension reduction. 
+
+This can be fulfilled with Principal Component Analysis (PCA): an unsupervised dimension reduction algorithm that identifies directions with the highest variances. By computing an orthogonal basis ordered from the highest to lowest explained variance, PCA can then take the first \textit{n} directions that add up to the \textit{x}\% variance threshold.
+
+To demonstrate PCA, a dataset rich in dimensionality is best suited to show the differences in runtime and accuracy with and without PCA. Datasets of images and videos fit this criterion. These datasets are often filled with noise and dimensions that contribute little to training. A motivating example would be a video at sixty frames per second. One frame to the next is likely not contributing a large enough difference for training. The LFW dataset works well for this as well, which consists of centered faces of famous people that are labeled. This dataset is small enough that it can be run locally in a reasonable amount of time, while also showcasing the difference with and without PCA. To train on the projected matrix produced by PCA, we will use a Collaborative Representation Classifier (CRC). 
+
+
+\end{document}
