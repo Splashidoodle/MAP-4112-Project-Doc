@@ -23,5 +23,27 @@ In order to classify faces, Principal Component Analysis (PCA) will be implement
 
 A main advantage of PCA is that a large variance ratio can usually be achieved with relatively few principal components. The number of principal components used is k, which is usually smaller than the feature space or the same size, but never larger. This means when we project onto these k components, we usually reduce the dimensions we are working with which reduces complexity and means we only store the features capture the most variance between faces. A main disadvantage of PCA is that it does not work with nonlinear features. Since our principal components are orthogonal to each other, any pattern or relationships between features that are not linear will not be recognized which results in poor classification of faces.
 
-In order to apply to a learning application, a Collaborative Representation Classifier (CRC) will be trained on the projected matrix. The dataset of president's faces consists of will be filtered to only includes faces with at least 5 examples. Some preprocessing steps will be taken which include tuning the hyperparmeter k on different variance ratios and including translations of faces to make our classifier more accurate. The performance of PCA using a classifier will involve splitting data into a 80\% training and 20\% test split. Eigenfaces will be computed from the training set and be fitted onto our classifer which will then be using to predict our testing set. 
+In order to apply to a learning application, a Collaborative Representation Classifier (CRC) will be trained on the projected matrix. The dataset of president's faces consists of will be filtered to only includes faces with at least 5 examples. Some preprocessing steps will be taken which include tuning the hyperparmeter k on different variance ratios and L2 normalizing our rows of data. The performance of PCA using a classifier will involve splitting data into a 60\% train / 15\% val / 25\% test split. Eigenfaces will be computed from the training set and be fitted onto our classifer which will then be using to predict our testing set. 
+
+\section{Results}
+After implementation, CRC with PCA was able to achieve a test accuracy
+of 50.51% and CRC without PCA achieved a test accuracy of 48.21%. For
+variance ratios 90%, 95%, 99%, the following respective k values were found,
+81, 154, 373. The use of PCA improved accuracy and grew with an increasing
+number of k principal components. Being able to retain most of the information
+using components makes operations faster with relatively small k values.
+\begin{figure}[h]
+    \centering
+    \hspace{-5cm}
+    \begin{minipage}{\textwidth}
+        \centering
+        \includegraphics[width=1.5\linewidth]{confusion_matrix.png}
+        \caption{Confusion Matrices}
+        \label{fig:confusion matrix}
+    \end{minipage}\hfill
+\end{figure}
+\vspace{2cm}
+\section{Conclusion}
+This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classificaiton accuracy. However this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
 \end{document}
+
