@@ -25,6 +25,15 @@ A main advantage of PCA is that a large variance ratio can usually be achieved w
 
 In order to apply to a learning application, a Collaborative Representation Classifier (CRC) will be trained on the projected matrix. The dataset of president's faces consists of will be filtered to only includes faces with at least 5 examples. Some preprocessing steps will be taken which include tuning the hyperparmeter k on different variance ratios and L2 normalizing our rows of data. The performance of PCA using a classifier will involve splitting data into a 60\% train / 15\% val / 25\% test split. Eigenfaces will be computed from the training set and be fitted onto our classifer which will then be using to predict our testing set. 
 
+\section{Implementation}
+To demonstrate PCA, the LFW dataset was used. CRC was implemented to test PCA. The implementation was in Python, using \textit{sklearn}. After loading the dataset, only images with greater than 50 images were kept. They were then resized to 40\% of the original resolution and flattened from a 50 * 37 resolution to 1850. Keeping images greater than or equal to 50 images was an important step in ensuring better training data for a more simple training model unlike an FCNN or CNN. A train/val/test split of 60/15/25 was used. The samples were then L2 normalized for CRC to perform better. 
+
+PCA was implemented by three functions. \textit{pca\_fit\_svd} computed the SVD on the samples, converted to eigenvalues, and found the explained variance by dividing by the number of samples - 1. Finally, the total variance was found by adding all explained variances together, and the ratio was computed. \textit{pca\_choose\_k\_from\_ratio} took the first k components generated from the variance ratios until the specified threshold was reached. A third function \textit{pca\_project\_splits} ran the first and second functions to get the top k components, and projected the train, val, and tests to the top \textit{k} components. 
+
+Since the CRC algorithm is out of scope for this project, it will only be briefly discussed. The CRC algorithm was not just called by a built-in python function but implemented. A precompute function solved for P, which is used for predictions. The \textit{crc\_predict\_one} function then made the prediction for a single sample and the \textit{crc\_predict\_set} used the \textit{crc\_predict\_one} function over all samples. 
+
+Finally, two experiments were ran, each with different hyperparameters. The first ran CRC without PCA at different $\lambda$ values. The values used ranged from 0.001 to 10, each scaling by 10. Whichever run generated the highest validation accuracy was used on the test set. This was repeated for CRC with PCA with the addition of a new parameter, ratio. The ratio specifies how much of the variance to keep. The configuration with the highest validation accuracy was used on the test set. All experiments are printed in the Jupyter Notebook provided. 
+
 \section{Results}
 After implementation, CRC with PCA was able to achieve a test accuracy
 of 50.51\% and CRC without PCA achieved a test accuracy of 48.21\%. For
@@ -35,8 +44,8 @@ variance ratios 90\%, 95\%, 99\%, the following respective k values were found,
 \label{fig:crc_comparison_table}
 \end{figure}
 
-\vspace{2.5cm}
 Using the information from the comparison table, we see our validation accuracy increases with an increasing number of k components. Similarly, increasing the number of principal components k can only increase the accuracy of the classification or keep it the same, but never decrease it. CRC with PCA will execute faster because it reduces the dimensions of the data we are working while also retaining as much information on it. CRC by itself will operate on the entire dataset which is considerably slower on larger datasets. 
+
 \begin{figure}[h]
     \centering
     \hspace{-5cm}
@@ -48,7 +57,8 @@ Using the information from the comparison table, we see our validation accuracy 
 \end{figure}
 
 From our confusion matrices, we see that only 188 of the faces were classified correctly when using just our CRC but when combining with PCA and using 373 principal components, we were able to classify 193 faces correctly. This shows how PCA can help filter unnecessary information which will reduce overfitting and increase accuracy. 
+
 \section{Conclusion}
-This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However, this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other,which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
+This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
 \end{document}
 
