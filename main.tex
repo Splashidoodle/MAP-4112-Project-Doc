@@ -27,23 +27,28 @@ In order to apply to a learning application, a Collaborative Representation Clas
 
 \section{Results}
 After implementation, CRC with PCA was able to achieve a test accuracy
-of 50.51% and CRC without PCA achieved a test accuracy of 48.21%. For
-variance ratios 90%, 95%, 99%, the following respective k values were found,
-81, 154, 373. The use of PCA improved accuracy and grew with an increasing
-number of k principal components. Being able to retain most of the information
-using components makes operations faster with relatively small k values.
+of 50.51\% and CRC without PCA achieved a test accuracy of 48.21\%. For
+variance ratios 90\%, 95\%, 99\%, the following respective k values were found,
+81, 154, 373. By setting $k = 373$,we went from working in our original feature space of 1850, to just 373 while still maintaining 99\% variance.   
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{crc_comparison_table.png}
+\label{fig:crc_comparison_table}
+\end{figure}
+
+\vspace{2.5cm}
+Using the information from the comparison table, we see our validation accuracy increases with an increasing number of k components. Similarly, increasing the number of principal components k can only increase the accuracy of the classification or keep it the same, but never decrease it. CRC with PCA will execute faster because it reduces the dimensions of the data we are working while also retaining as much information on it. CRC by itself will operate on the entire dataset which is considerably slower on larger datasets. 
 \begin{figure}[h]
     \centering
     \hspace{-5cm}
     \begin{minipage}{\textwidth}
         \centering
-        \includegraphics[width=1.5\linewidth]{confusion_matrix.png}
-        \caption{Confusion Matrices}
+        \includegraphics[width=1.5\linewidth]{confusion_matrices.png}
         \label{fig:confusion matrix}
     \end{minipage}\hfill
 \end{figure}
-\vspace{2cm}
+
+From our confusion matrices, we see that only 188 of the faces were classified correctly when using just our CRC but when combining with PCA and using 373 principal components, we were able to classify 193 faces correctly. This shows how PCA can help filter unnecessary information which will reduce overfitting and increase accuracy. 
 \section{Conclusion}
-This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classificaiton accuracy. However this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
+This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However, this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other,which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
 \end{document}
 
