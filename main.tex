@@ -54,7 +54,7 @@ Using the information from the comparison table, we see our validation accuracy 
     \end{minipage}\hfill
 \end{figure}
 
-From our confusion matrices, we see that only 188 of the faces were classified correctly when using CRC without PCA but when combining with PCA and using 373 principal components, we were able to classify 193 faces correctly. This shows how PCA can help filter unnecessary information which will reduce overfitting and even increase accuracy in some cases.
+From our confusion matrices, we see that only 188 of the faces were classified correctly when using CRC without PCA but when combining with PCA and using 373 principal components, we were able to classify 193 faces correctly. This shows how PCA can help filter unnecessary information which will reduce overfitting and even increase accuracy in some cases. Since George W Bush seemed to have a skew in the number of photos, CRC tended to predict him often, hence the outlier column.
 
 \section{Conclusion}
 This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However this does have limitations. Since our principal components are eigenvectors, they are linearly independent from each other. This makes any non-linearly independent patterns that can be useful difficult to identify, making classification harder. It also demonstrates how removing too much variance does make the model less accurate. However, reducing even 1\% of the variance makes a huge difference in runtime and compromises little to no accuracy. 
