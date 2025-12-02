@@ -38,7 +38,7 @@ Finally, two experiments were ran, each with different hyperparameters. The firs
 After implementation, CRC with PCA was able to achieve a test accuracy
 of 50.51\% and CRC without PCA achieved a test accuracy of 48.21\%. For
 variance ratios 90\%, 95\%, 99\%, the following respective k values were found,
-81, 154, 373. By setting $k = 373$,we went from working in our original feature space of 1850, to just 373 while still maintaining 99\% variance.   
+81, 154, 373. By setting $k = 373$,we went from working in our original feature space of 1850, to just 373 while still maintaining 99\% variance. The runtime to run all confuiguration of CRC with no PCA was 7.6 seconds, while the runtime to run all configurations of CRC WITH PCA was 3.8 seconds. The latter had 15 configurations, while the former just had 5. 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{crc_comparison_table.png}
 \label{fig:crc_comparison_table}
@@ -59,6 +59,6 @@ Using the information from the comparison table, we see our validation accuracy 
 From our confusion matrices, we see that only 188 of the faces were classified correctly when using just our CRC but when combining with PCA and using 373 principal components, we were able to classify 193 faces correctly. This shows how PCA can help filter unnecessary information which will reduce overfitting and increase accuracy. 
 
 \section{Conclusion}
-This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However this does have limitations, since our principal components are eigenvectors, they are linearly independent from each other which means that any non-linearly independent patterns that can be useful for identifying are difficult,making it difficult to classify certain faces.
+This project showed that PCA is very useful for facial classification. By retaining the most informative variance, we were able to reduce the dimensions we are working with while also improving our classification accuracy. However this does have limitations. Since our principal components are eigenvectors, they are linearly independent from each other. This makes any non-linearly independent patterns that can be useful difficult to identify, making classification harder. It also demonstrates how removing too much variance does make the model less accurate. However, reducing even 1\% of of the variance makes a huge difference in runtime without compromising accuracy. 
 \end{document}
 
